@@ -67,3 +67,16 @@ def blog(request):
             'media_url':settings.MEDIA_URL
         })
 
+def create(request):
+    if request.method == 'POST':
+        try:
+            postname = request.POST['postname']
+            content = request.POST['content']
+            category = request.POST['category']
+            image = request.FILES['image']
+            Post(postname=postname,content=content,category=category,image=image,user=request.user).save()
+        except:
+            print("Error")
+        return redirect('index')
+    else:
+        return render(request,"create.html")
