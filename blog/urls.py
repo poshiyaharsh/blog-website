@@ -21,8 +21,14 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path("",include("users.urls")),
-    #  path("",include("blogapp.urls")),
+    path("", include(("blogapp.urls", "blogapp"), namespace="blogapp")),
+    path("post/", include(("post.urls", "post"), namespace="post")),
+
+    # other apps
+    path("users/", include(("users.urls", "users"), namespace="users")),
+    # path("contact/", include(("contact.urls", "contact"), namespace="contact")),
+    # path("profile/", include(("profile_app.urls", "profile_app"), namespace="profile_app")),
+
 ]
   
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)  
